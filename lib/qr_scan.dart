@@ -1,72 +1,95 @@
-//import 'package:barcode_scanner/barcode_scanning_data.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
-import 'package:barcode_scanner/classical_components/barcode_camera.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class ScanScreen extends StatefulWidget {
+
+
+import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class ScanQR extends StatefulWidget {
+  ScanQR({Key, key}) : super(key: key);
+
   @override
-  _ScanState createState() => new _ScanState();
+  _ScanQRState createState() => _ScanQRState();
 }
 
-class _ScanState extends State<ScanScreen> {
-  String barcode = "";
+String qrData = "No data found!";
+var data;
+bool hasdata = false;
 
-  @override
-  initState() {
-    super.initState();
-  }
-
+class _ScanQRState extends State<ScanQR> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: new AppBar(
-          title: new Text('QR Code Scanner'),
+    return Hero(
+      tag: "Scan QR",
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("QR Scanner"),
         ),
-        body: new Center(
-          child: new Column(
+        body: Container(
+          width: double.infinity,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: ElevatedButton(
-                    //backgroundColor: Colors.blue,
-                    //textColor: Colors.white,
-                    //splashColor: Colors.blueGrey,
-                    onPressed: scan,
-                    child: const Text('START CAMERA SCAN',style: TextStyle(
-                      color: Colors.blue,
-                    ),)
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      "Raw Data:  ${(qrData)}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.launch_outlined),
+                    onPressed: hasdata
+                        ? () async {
+                      if (await canLaunch(qrData)) {
+                        print(qrData);
+                        await launch(qrData);
+                      } else {
+                        throw 'Could not launch ';
+                      }
+                    }
+                        : null,
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              Container(
+                width: ((MediaQuery.of(context).size.width) / 2) - 45,
+                height: 35,
+                child: ElevatedButton(style:ElevatedButton.styleFrom(primary:Colors.blue),
+                  // focusColor: Colors.red,
+                  // highlightColor: Colors.blue,
+                  // hoverColor: Colors.lightBlue[100],
+                  // splashColor: Colors.blue,
+                  // borderSide: BorderSide(
+                  //   width: 3,
+                  //   color: Colors.blue,
+                  // ),
+                  // shape: StadiumBorder(),
+                  child: Text(
+                    "Scan QR",
+                    style: TextStyle(fontSize: 17),
+                  ),
+                  onPressed: () async {
+                    var options = ScanOptions(
+                      autoEnableFlash: true,
+                    );
+                    var data = await BarcodeScanner.scan(options: options);
+                    setState(() {
+                      qrData = data.rawContent.toString();
+                      hasdata = true;
+                    });
+                  },
                 ),
-              )
-              ,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(barcode, textAlign: TextAlign.center,),
-              )
-              ,
+              ),
             ],
           ),
-        ));
-  }
-
-  Future scan() async {
-    try {
-      String barcode = (await BarcodeScanner.scan()) as String;
-      setState(() => this.barcode = barcode);
-    } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        setState(() {
-          this.barcode = 'The user did not grant the camera permission!';
-        });
-      } else {
-        setState(() => this.barcode = 'Unknown error: $e');
-      }
-    } on FormatException{
-      setState(() => this.barcode = 'null (User returned using the "back"-button before scanning anything. Result)');
-    } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
-    }
+        ),
+      ),
+    );
   }
 }

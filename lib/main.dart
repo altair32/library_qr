@@ -18,14 +18,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Expanded(
-        child: Container(child: Column(
-          children: [
-            Register(),
-            ElevatedButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> GenerateScreen())), child: Text('QR Generate'),style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),)
-          ],
-        )),
-      ),
-    );
+      body: Container(child: Column(
+            children: [SizedBox(height: 100,),
+              ElevatedButton(onPressed: ()=>Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> GenerateScreen())), child: Text('QR Generate'),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),),
+              ElevatedButton(onPressed: ()=>Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> ScanQR())), child: Text('QR Scan'),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),)
+            ],
+          )),
+        );
   }
 }
