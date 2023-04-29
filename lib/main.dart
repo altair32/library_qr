@@ -3,11 +3,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:library_qr/screens/register.dart';
+import 'qr_generate.dart';
+import 'qr_scan.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MaterialApp(home: MyApp()) );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,8 +17,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Register(),
+    return Scaffold(
+      body: Expanded(
+        child: Container(child: Column(
+          children: [
+            Register(),
+            ElevatedButton(onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=> GenerateScreen())), child: Text('QR Generate'),style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),)
+          ],
+        )),
+      ),
     );
   }
 }
