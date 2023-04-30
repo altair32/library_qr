@@ -7,6 +7,7 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
+import 'timer.dart';
 
 class GenerateScreen extends StatefulWidget {
 
@@ -94,6 +95,7 @@ class GenerateScreenState extends State<GenerateScreen> {
                       child:  Text("SUBMIT"),
                       onPressed: () {
                         setState((){
+                          cdowntimer();
                           _dataString = _textController.text;
                           _inputErrorText = null;
                         });
