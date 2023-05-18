@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:library_qr/screens/register.dart';
 import 'qr_generate.dart';
 import 'qr_scan.dart';
+import 'defaulter_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),),
               ElevatedButton(onPressed: ()=>Navigator.push(context,
                   MaterialPageRoute(builder: (context)=> ScanQR())), child: Text('QR Scan'),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),),
+              ElevatedButton(onPressed: ()=>Navigator.push(context,
+                  MaterialPageRoute(builder: (context)=> defaulter())), child: Text('Debug'),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),)
             ],
           )),
