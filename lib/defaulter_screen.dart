@@ -12,7 +12,7 @@ class _defaulterState extends State<defaulter> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Title(color: Colors.white, child: Text('Deafualters List'))
+        title: Title(color: Colors.white, child: Text('Defaulter List'))
       ),
       body: SingleChildScrollView(
         child: Container(
