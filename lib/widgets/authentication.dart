@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:library_qr/screens/wrapper.dart';
 
 class GoogleSignInProvider extends ChangeNotifier{
   final googleSignIn = GoogleSignIn();
@@ -21,6 +22,13 @@ class GoogleSignInProvider extends ChangeNotifier{
 
     await FirebaseAuth.instance.signInWithCredential(credential);
     notifyListeners();
+  }
+
+  Future change() async{
+    print("works");
+    if(_user!=null){
+      return const Wrapper();
+    }
   }
 
   Future logOut() async {

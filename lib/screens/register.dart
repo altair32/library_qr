@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:library_qr/widgets/authentication.dart';
 import 'package:provider/provider.dart';
 
-import 'home.dart';
+import 'wrapper.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -18,7 +18,9 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Center(child: Text("Register"),),
+        title: const Center(
+          child: Text("Register"),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -26,16 +28,17 @@ class _RegisterState extends State<Register> {
           Center(
             child: Column(
               children: [
-                ElevatedButton(onPressed: ()=>Navigator.push(context,
-                    MaterialPageRoute(builder: (context)=> Home())), child: Text('Home'),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),),
-                ElevatedButton(onPressed: () async{
-                  final provider = Provider.of<GoogleSignInProvider>(context,listen : false);
-                  provider.googleLogin();
-                  if(provider.user != null){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                  }
-                }, child: Text("Sign In")),
+                ElevatedButton(
+                    onPressed: () async {
+                      final provider = Provider.of<GoogleSignInProvider>(
+                          context,
+                          listen: false);
+                      provider.googleLogin();
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => Wrapper()));
+                      //provider.change();
+                    },
+                    child: const Text("Sign In")),
               ],
             ),
           )
