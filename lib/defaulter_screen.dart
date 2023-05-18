@@ -9,18 +9,31 @@ class defaulter extends StatefulWidget {
 
 class _defaulterState extends State<defaulter> {
   @override
+  String? name;
+  String? regno;
+  String? hostel;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Title(color: Colors.white, child: Text('Deafualters List'))
+        title: Title(color: Colors.white, child: Text('Defualters List'))
       ),
       body: SingleChildScrollView(
         child: Container(
           child: Container(
-            width: 350,
-            height: 50,
-            child: Card(
-              color: Colors.black,
+            width: 850,
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text(name="Isha",style: TextStyle(color: Colors.black),),
+                        Text(regno="RA2011003010317",style: TextStyle(color: Colors.black),),
+                        Text(hostel="Kopperundevi",style: TextStyle(color: Colors.black),)],
+                  ),
+
+                color: Colors.white,
+              ),
             ),
           ),
         ),

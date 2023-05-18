@@ -24,13 +24,20 @@ class _RegisterState extends State<Register> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: ElevatedButton(onPressed: () async{
-              final provider = Provider.of<GoogleSignInProvider>(context,listen : false);
-              provider.googleLogin();
-              if(provider.user != null){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-              }
-            }, child: Text("Sign In")),
+            child: Column(
+              children: [
+                ElevatedButton(onPressed: ()=>Navigator.push(context,
+                    MaterialPageRoute(builder: (context)=> Home())), child: Text('Home'),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),),
+                ElevatedButton(onPressed: () async{
+                  final provider = Provider.of<GoogleSignInProvider>(context,listen : false);
+                  provider.googleLogin();
+                  if(provider.user != null){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                  }
+                }, child: Text("Sign In")),
+              ],
+            ),
           )
         ],
       ),
