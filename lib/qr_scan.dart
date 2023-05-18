@@ -1,3 +1,6 @@
+
+
+
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,6 +15,9 @@ class ScanQR extends StatefulWidget {
 String qrData = "No data found!";
 var data;
 bool hasdata = false;
+String? fullname;
+String? regno;
+
 
 class _ScanQRState extends State<ScanQR> {
   @override

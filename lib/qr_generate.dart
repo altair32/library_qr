@@ -1,5 +1,5 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'dart:io';
 import 'package:flutter/rendering.dart';
+import 'package:path_provider/path_provider.dart';
 import 'timer.dart';
 
 class GenerateScreen extends StatefulWidget {
@@ -25,6 +26,8 @@ class GenerateScreenState extends State<GenerateScreen> {
   String _dataString = "Hello from this QR";
   String? _inputErrorText;
   final TextEditingController _textController =  TextEditingController();
+  final CountDownController _controller = CountDownController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +97,8 @@ class GenerateScreenState extends State<GenerateScreen> {
                     child:  ElevatedButton(
                       child:  Text("SUBMIT"),
                       onPressed: () {
+                        _controller.start();
                         setState((){
-                          cdowntimer();
                           _dataString = _textController.text;
                           _inputErrorText = null;
                         });
@@ -125,6 +128,47 @@ class GenerateScreenState extends State<GenerateScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  void cdowntime() {
+    CircularCountDownTimer(
+      duration: 10,
+      initialDuration: 0,
+      controller: _controller,
+      width: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.height / 2,
+      ringColor: Colors.grey[300]!,
+      ringGradient: null,
+      fillColor: Colors.purpleAccent[100]!,
+      fillGradient: null,
+      backgroundColor: Colors.purple[500],
+      backgroundGradient: null,
+      strokeWidth: 20.0,
+      strokeCap: StrokeCap.round,
+      textStyle: TextStyle(
+          fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
+      textFormat: CountdownTextFormat.S,
+      isReverse: false,
+      isReverseAnimation: false,
+      isTimerTextShown: true,
+      autoStart: false,
+      onStart: () {
+        debugPrint('Countdown Started');
+      },
+      onComplete: () {
+        debugPrint('Countdown Ended');
+      },
+      onChange: (String timeStamp) {
+        debugPrint('Countdown Changed $timeStamp');
+      },
+      timeFormatterFunction: (defaultFormatterFunction, duration) {
+        if (duration.inSeconds == 0) {
+          return "Start";
+        } else {
+          return Function.apply(defaultFormatterFunction, [duration]);
+        }
+      },
     );
   }
 }
