@@ -15,6 +15,9 @@ class ScanQR extends StatefulWidget {
 String qrData = "No data found!";
 var data;
 bool hasdata = false;
+String? fullname;
+String? regno;
+
 
 class _ScanQRState extends State<ScanQR> {
   @override

@@ -12,20 +12,17 @@ class cdowntimer extends StatefulWidget {
 class _cdowntimerState extends State<cdowntimer> {
   @override
   Widget build(BuildContext context) {
-    return Draggable(child: Container(
-      child: CircularCountDownTimer(width: 5.0, height: 5.0, duration: 10,
-        fillColor: Colors.white, ringColor: Colors.blue,
-            autoStart: true,
-        isReverse: true,
-        isTimerTextShown: true,
-        onComplete: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>GenerateScreen()));}
-      ),
-    ), feedback: Container(child: CircularCountDownTimer(width: 5.0, height: 5.0, duration: 10,
-        fillColor: Colors.white, ringColor: Colors.blue,
-        autoStart: true,
-        isReverse: true,
-        isTimerTextShown: true,
-        onComplete: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>GenerateScreen()));}
-    ),));
+    return CircularCountDownTimer(width: 5.0, height: 5.0, duration: 10,
+      initialDuration: 10,
+      fillColor: Colors.white, ringColor: Colors.blue,
+          autoStart: true,
+      isReverse: true,
+      isTimerTextShown: true,
+        onStart: () {
+          debugPrint('Countdown Started');
+        },
+      onComplete: (){print("Count end");
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>GenerateScreen()));}
+    );
   }
 }
