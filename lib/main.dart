@@ -3,6 +3,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:library_qr/screens/register.dart';
+import 'package:library_qr/widgets/authentication.dart';
+import 'package:provider/provider.dart';
+
 import 'qr_generate.dart';
 import 'qr_scan.dart';
 import 'defaulter_screen.dart';
@@ -10,7 +13,21 @@ import 'defaulter_screen.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MaterialApp(home: MyApp()) );
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) =>GoogleSignInProvider())
+        // Provider<FirebaseAuthMethods>(
+        //   create: (_) => FirebaseAuthMethods(),
+        // ),
+        // StreamProvider(
+        //   create: (context) => context.read<FirebaseAuthMethods>().authState,
+        //   initialData: null,
+        // ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

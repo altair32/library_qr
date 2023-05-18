@@ -37,12 +37,13 @@ dependencies:
   firebase_auth: ^4.4.2
   firebase_core: ^2.10.0
   google_sign_in: ^6.1.0
-  path_provider: ^2.0.14
+  provider: ^6.0.5
   barcode_scan2: ^4.2.4
   barcode_scanner: ^3.2.4
   qr_flutter: ^4.0.0
   url_launcher: ^6.1.10
   circular_countdown_timer: ^0.2.3
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:
