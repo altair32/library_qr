@@ -6,6 +6,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:library_qr/widgets/authentication.dart';
 import 'package:provider/provider.dart';
 
+import '../defaulter_screen.dart';
+import '../qr_generate.dart';
+import '../qr_scan.dart';
+
 class LoggedIn extends StatefulWidget {
   const LoggedIn({Key? key}) : super(key: key);
 
@@ -25,7 +29,8 @@ class _LoggedInState extends State<LoggedIn> {
         actions: [
           TextButton.icon(
               onPressed: () {
-                final provider = Provider.of<GoogleSignInProvider>(context,listen: false);
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.logOut();
               },
               icon: Icon(
@@ -43,8 +48,29 @@ class _LoggedInState extends State<LoggedIn> {
             radius: 40,
             backgroundImage: NetworkImage(user.photoURL!),
           ),
-          Text('Name : '+user.displayName!),
-          Text('Name : '+user.email!),
+          Text('Name : ' + user.displayName!),
+          Text('Name : ' + user.email!),
+          SizedBox(
+            height: 100,
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => GenerateScreen())),
+            child: Text('QR Generate'),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => ScanQR())),
+            child: Text('QR Scan'),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => defaulter())),
+            child: Text('Debug'),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.brown),
+          ),
         ],
       ),
     );
