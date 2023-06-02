@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:library_qr/widgets/authentication.dart';
+import 'package:library_qr/services/authentication.dart';
 import 'package:provider/provider.dart';
 
 import '../defaulter_screen.dart';
@@ -49,7 +49,7 @@ class _LoggedInState extends State<LoggedIn> {
             backgroundImage: NetworkImage(user.photoURL!),
           ),
           Text('Name : ' + user.displayName!),
-          Text('Name : ' + user.email!),
+          Text('Email : ' + user.email!),
           SizedBox(
             height: 100,
           ),

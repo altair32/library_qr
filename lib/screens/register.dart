@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:library_qr/widgets/authentication.dart';
+import 'package:library_qr/services/authentication.dart';
 import 'package:provider/provider.dart';
 
 import 'wrapper.dart';

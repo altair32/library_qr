@@ -44,6 +44,7 @@ dependencies:
   url_launcher: ^6.1.10
   circular_countdown_timer: ^0.2.3
   path_provider: ^2.0.15
+  cloud_firestore: ^4.5.0
 
 dev_dependencies:
   flutter_test:

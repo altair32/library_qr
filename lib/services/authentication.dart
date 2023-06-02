@@ -25,7 +25,6 @@ class GoogleSignInProvider extends ChangeNotifier{
   }
 
   Future change() async{
-    print("works");
     if(_user!=null){
       return const Wrapper();
     }

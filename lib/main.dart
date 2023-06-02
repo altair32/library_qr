@@ -3,7 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:library_qr/screens/register.dart';
-import 'package:library_qr/widgets/authentication.dart';
+import 'package:library_qr/services/authentication.dart';
 import 'package:provider/provider.dart';
 
 import 'qr_generate.dart';
